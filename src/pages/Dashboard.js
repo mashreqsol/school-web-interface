@@ -31,6 +31,7 @@ const Dashboard = () => {
       {/*  <Search />
       <Info />
       <User /> */}
+
       <FirebaseCRUD />
       <FirebaseCRUDFee />
       <FirebaseCRUDResult />

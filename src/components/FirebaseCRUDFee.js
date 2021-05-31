@@ -11,8 +11,7 @@ import { GithubContext } from "../context/context";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 150,
-    maxWidth: 200,
+    minWidth: 200,
   },
   bullet: {
     display: "inline-block",

@@ -5,14 +5,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { GithubContext } from "../context/context";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 150,
-    maxWidth: 150,
+    minWidth: 200,
   },
   bullet: {
     display: "inline-block",
@@ -26,8 +26,8 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   gridContainer: {
-    paddingLeft: "40px",
-    paddingRight: "40px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
   },
 });
 
@@ -92,58 +92,72 @@ const FirebaseCRUD = () => {
     console.log(students);
     return (
       <>
-        {students.map((student, index) => {
-          const { class_name, father_contact, father_name, name, student_id } =
-            student;
-          return (
-            <Card>
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Student Name: {name}
-                </Typography>
-                <Typography>Class Name: {class_name}</Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Father Contact No: {father_contact}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  onClick={(e) => {
-                    SetStudentAdmNo(student_id);
-                    handleSFees(student_id);
-                    console.log(student_id);
-                  }}
-                >
-                  FEE RECORDS
-                </Button>
+        <Grid
+          container
+          spacing={4}
+          className={classes.gridContainer}
+          justify="center"
+        >
+          {students.map((student, index) => {
+            const {
+              class_name,
+              father_contact,
+              father_name,
+              name,
+              student_id,
+            } = student;
+            return (
+              <Grid item xs={12} sm={6} md={4}>
+                <Card className={classes.root}>
+                  <CardContent>
+                    <Typography
+                      className={classes.title}
+                      color="textSecondary"
+                      gutterBottom
+                    >
+                      Student Name: {name}
+                    </Typography>
+                    <Typography>Class Name: {class_name}</Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                      Father Contact No: {father_contact}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                      onClick={(e) => {
+                        SetStudentAdmNo(student_id);
+                        handleSFees(student_id);
+                        console.log(student_id);
+                      }}
+                    >
+                      FEE RECORDS
+                    </Button>
 
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  size="small"
-                  onClick={(e) => {
-                    SetStudentAdmNo(student_id);
-                    handleSResults(student_id);
-                    console.log(student_id);
-                  }}
-                >
-                  RESULTS
-                </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      size="small"
+                      onClick={(e) => {
+                        SetStudentAdmNo(student_id);
+                        handleSResults(student_id);
+                        console.log(student_id);
+                      }}
+                    >
+                      RESULTS
+                    </Button>
 
-                <Button variant="contained" size="small">
-                  HOME WORK
-                </Button>
-              </CardActions>
-            </Card>
-          );
-        })}
+                    <Button variant="contained" size="small">
+                      HOME WORK
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
       </>
     );
   }
