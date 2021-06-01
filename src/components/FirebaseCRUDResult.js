@@ -14,10 +14,6 @@ const FirebaseCRUDResult = () => {
           //    console.log("series..........", JSON.parse(result.sheets));
           return (
             <div style={{ backgroundColor: "white", textAlign: "center" }}>
-              <br />
-              <h4>Result Analysis</h4>
-              <br />
-
               <div className="app">
                 <div className="row">
                   <div className="mixed-chart">

@@ -49,10 +49,6 @@ const FirebaseCRUDFee = () => {
           // const { arrears, due_amount, due_date, title } = studentfee;
           return (
             <div style={{ backgroundColor: "white", textAlign: "center" }}>
-              <br />
-              <h4>Payment History</h4>
-              <br />
-
               <div className="app">
                 <div className="row">
                   <div className="mixed-chart">

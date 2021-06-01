@@ -19,27 +19,6 @@ import {
   FirebaseCRUDResult,
 } from "../components";
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 200,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  gridContainer: {
-    paddingLeft: "20px",
-    paddingRight: "20px",
-  },
-});
-
 const Dashboard = () => {
   const classes = useStyles();
   const { isloading } = React.useContext(GithubContext);
@@ -100,5 +79,25 @@ const Dashboard = () => {
     </main>
   );
 };
+const useStyles = makeStyles({
+  root: {
+    minWidth: 200,
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  gridContainer: {
+    paddingLeft: "20px",
+    paddingRight: "20px",
+  },
+});
 
 export default Dashboard;
