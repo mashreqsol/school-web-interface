@@ -39,20 +39,6 @@ const FirebaseCRUDFee = () => {
 
   const classes = useStyles();
 
-  /* const getFeesInformation = () => {
-    const studentsFees = firebase.database().ref("fees");
-    SetFeesData(null);
-    studentsFees
-      .orderByChild("student_id")
-      .equalTo(studentAdmnNo)
-      .on("value", (snapshot) => {
-        SetFeesData(snapshot.val());
-        console.log("fees data", feesData);
-      });
-  }; */
-
-  //  console.log(user.email);
-
   if (!fees) return <div>Loading Student Fees Data</div>;
   if (fees)
     return (
