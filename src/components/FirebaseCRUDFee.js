@@ -7,6 +7,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Chart from "react-apexcharts";
 import { GithubContext } from "../context/context";
 
 const useStyles = makeStyles({
@@ -44,23 +45,22 @@ const FirebaseCRUDFee = () => {
     return (
       <>
         {fees.map((studentfee, index) => {
-          const { arrears, due_amount, due_date, title } = studentfee;
+          const { options, sheets } = studentfee;
+          // const { arrears, due_amount, due_date, title } = studentfee;
           return (
-            <Card>
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Title: {title}
-                </Typography>
-                <Typography>Fee Amount: {due_amount}</Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  Arrears: {arrears}
-                </Typography>
-              </CardContent>
-            </Card>
+            <div style={{ backgroundColor: "white", textAlign: "center" }}>
+              <br />
+              <h4>Payment History</h4>
+              <br />
+
+              <div className="app">
+                <div className="row">
+                  <div className="mixed-chart">
+                    <Chart options={options} series={sheets} type="bar" />
+                  </div>
+                </div>
+              </div>
+            </div>
           );
         })}
       </>

@@ -41,18 +41,6 @@ const FirebaseCRUD = () => {
 
   const classes = useStyles();
 
-  /* const getFeesInformation = () => {
-    const studentsFees = firebase.database().ref("fees");
-    SetFeesData(null);
-    studentsFees
-      .orderByChild("student_id")
-      .equalTo(studentAdmnNo)
-      .on("value", (snapshot) => {
-        SetFeesData(snapshot.val());
-        console.log("fees data", feesData);
-      });
-  }; */
-
   //  console.log(user.email);
   const handleSFees = (student_id) => {
     //  e.preventDefault();
@@ -130,10 +118,11 @@ const FirebaseCRUD = () => {
                       onClick={(e) => {
                         SetStudentAdmNo(student_id);
                         handleSFees(student_id);
+                        handleSResults(student_id);
                         console.log(student_id);
                       }}
                     >
-                      FEE RECORDS
+                      View Detail Information
                     </Button>
 
                     <Button
