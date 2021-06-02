@@ -1,10 +1,16 @@
 import React from "react";
 import { GithubContext } from "../context/context";
+import CircularIndeterminate from "../utilities/CircularIndeterminate";
 import Chart from "react-apexcharts";
 const FirebaseCRUDResult = () => {
   const { results } = React.useContext(GithubContext);
 
-  if (!results) return <div>Result Data is Loading......</div>;
+  if (!results)
+    return (
+      <div>
+        <CircularIndeterminate />
+      </div>
+    );
   if (results) {
     return (
       <>

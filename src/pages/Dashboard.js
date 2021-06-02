@@ -27,11 +27,11 @@ const Dashboard = () => {
   if (isloading) {
     return (
       <main>
-        <Navbar></Navbar>
-        <Search></Search>
-        <div className="container">
+        {/*    <Navbar></Navbar>
+        <Search></Search> */}
+        {/*   <div className="container">
           <div className="loading"></div>
-        </div>
+        </div> */}
       </main>
     );
   }

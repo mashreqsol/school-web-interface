@@ -13,7 +13,11 @@ const DailyHomework = () => {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="customized table">
+        <Table
+          className={classes.table}
+          size="small"
+          aria-label="customized table"
+        >
           <TableHead>
             <TableRow>
               <StyledTableCell>Subject</StyledTableCell>
@@ -41,7 +45,10 @@ function createData(name, detail) {
 
 const rows = [
   createData("English", "This is a Test Content for the Home Work Display"),
-  createData("Urdu", "اردو کا کام"),
+  createData(
+    "Urdu",
+    " اردو کا کام اردو کا کام اردو کا کام اردو کا کام اردو کا کام اردو کا کام اردو کا کام"
+  ),
   createData("Maths", "This is a Test Content for the Home Work Display"),
   createData("Science", "This is a Test Content for the Home Work Display"),
   createData("SST", "This is a Test Content for the Home Work Display"),
@@ -50,7 +57,6 @@ const rows = [
 const useStyles = makeStyles({
   table: {
     minWidth: 200,
-    minHeight: 380,
   },
 });
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "./firebase";
+
 import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -76,7 +77,7 @@ const FirebaseCRUD = () => {
     getStudents();
   }, []);
 
-  if (!students) return <div>Students Data is Loading......</div>;
+  if (!students) return <></>;
   if (students) {
     //   console.log(students);
     return (
@@ -85,7 +86,7 @@ const FirebaseCRUD = () => {
           container
           spacing={4}
           className={classes.gridContainer}
-          justify="center"
+          justify="left"
         >
           {students.map((student, index) => {
             const { class_name, section, father_contact, name, student_id } =
