@@ -3,7 +3,7 @@ import { GithubContext } from "../context/context";
 import Chart from "react-apexcharts";
 const FirebaseCRUDResult = () => {
   const { results } = React.useContext(GithubContext);
-  //  console.log("Firebase CRUD RESULT", results);
+
   if (!results) return <div>Result Data is Loading......</div>;
   if (results) {
     return (
@@ -11,7 +11,6 @@ const FirebaseCRUDResult = () => {
         {results.map((result, index) => {
           const { options, sheets } = result;
 
-          //    console.log("series..........", JSON.parse(result.sheets));
           return (
             <div style={{ backgroundColor: "white", textAlign: "center" }}>
               <div className="app">

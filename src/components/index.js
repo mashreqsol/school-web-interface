@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import FirebaseCRUD from "./FirebaseCRUD";
 import FirebaseCRUDFee from "./FirebaseCRUDFee";
 import FirebaseCRUDResult from "./FirebaseCRUDResult";
+import DailyHomework from "./DailyHomework";
 
 export {
   Info,
@@ -14,4 +15,5 @@ export {
   FirebaseCRUD,
   FirebaseCRUDFee,
   FirebaseCRUDResult,
+  DailyHomework,
 };

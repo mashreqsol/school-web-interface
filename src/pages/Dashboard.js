@@ -7,6 +7,7 @@ import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { GithubContext } from "../context/context";
+
 import {
   Info,
   Repos,
@@ -15,8 +16,8 @@ import {
   Navbar,
   FirebaseCRUD,
   FirebaseCRUDFee,
-  Graph,
   FirebaseCRUDResult,
+  DailyHomework,
 } from "../components";
 
 const Dashboard = () => {
@@ -76,10 +77,14 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <DailyHomework />
+        </Grid>
       </Grid>
     </main>
   );
 };
+
 const useStyles = makeStyles({
   root: {
     minWidth: 200,
