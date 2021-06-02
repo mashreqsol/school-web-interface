@@ -20,12 +20,12 @@ const GithubProvider = ({ children }) => {
   const [error, setError] = useState({ show: false, msg: `` });
   const [fees, SetFees] = useState(null);
   const [results, SetResults] = useState(null);
-
+  const [studentName, SetStudentName] = useState("");
   const getResultsInformation = async (studentAdmnNo) => {
-    console.log(
+    /*   console.log(
       "Student Admission No Inside context: RESULT FUNCTION",
-      studentAdmnNo
-    );
+      studentAdmnNo  );*/
+
     const studentsResults = await firebase.database().ref("results");
     SetResults(null);
 
@@ -34,18 +34,20 @@ const GithubProvider = ({ children }) => {
       .equalTo(studentAdmnNo)
       .on("value", (snapshot) => {
         const resultresponse = snapshot.val();
-        console.log("results dataaaaaa  ", resultresponse);
+        //   console.log("results dataaaaaa  ", resultresponse);
         if (resultresponse) {
           SetResults(resultresponse);
-          console.log("Results", results);
+          //     console.log("Results", results);
         }
       });
   };
 
-  const getFeesInformation = (studentAdmnNo) => {
-    //  toggleError();
+  const getFeesInformation = (studentAdmnNo, stdname) => {
+    // console.log("Student Name", stdname);
+    //   toggleError();
     //  setIsloading(true);
-    console.log("Student Admission No Inside context:", studentAdmnNo);
+    //  console.log("Student Admission No Inside context:", studentAdmnNo);
+    SetStudentName(stdname);
     const studentsFees = firebase.database().ref("fees");
     SetFees(null);
 
@@ -54,22 +56,22 @@ const GithubProvider = ({ children }) => {
       .equalTo(studentAdmnNo)
       .on("value", (snapshot) => {
         const feeresponse = snapshot.val();
-        console.log("fees dataaaaaa  ", feeresponse);
+        //    console.log("fees dataaaaaa  ", feeresponse);
         if (feeresponse) {
           SetFees(feeresponse);
-          console.log("Fee", fees);
+          //    console.log("Fee", fees);
         }
       });
   };
 
   const searchGithubUser = async (user) => {
-    console.log(user);
+    //   console.log(user);
     toggleError();
     setIsloading(true);
     const response = await axios(`${rootUrl}/users/${user}`).catch((error) =>
       console.log(error)
     );
-    console.log(response);
+    //    console.log(response);
     if (response) {
       setGithubUser(response.data);
       const { repos_url, followers_url } = response.data;
@@ -117,7 +119,7 @@ const GithubProvider = ({ children }) => {
   }
 
   useEffect(checkRequests, []);
-  console.log("Fee......", fees);
+  //console.log("Fee......", fees);
   //  setIsloading(false);
   return (
     <GithubContext.Provider
@@ -133,6 +135,7 @@ const GithubProvider = ({ children }) => {
         fees,
         getResultsInformation,
         results,
+        studentName,
       }}
     >
       {children}

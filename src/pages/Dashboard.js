@@ -21,7 +21,8 @@ import {
 
 const Dashboard = () => {
   const classes = useStyles();
-  const { isloading } = React.useContext(GithubContext);
+  const { isloading, studentName } = React.useContext(GithubContext);
+
   if (isloading) {
     return (
       <main>
@@ -55,7 +56,7 @@ const Dashboard = () => {
                 color="textSecondary"
                 gutterBottom
               >
-                Results Data
+                Results Data - {studentName}
               </Typography>
               <FirebaseCRUDResult />
             </CardContent>
@@ -69,7 +70,7 @@ const Dashboard = () => {
                 color="textSecondary"
                 gutterBottom
               >
-                Payment History
+                Payment History - {studentName}
               </Typography>
               <FirebaseCRUDFee />
             </CardContent>

@@ -37,16 +37,17 @@ const FirebaseCRUD = () => {
   const { user } = useAuth0();
   const [students, SetStudents] = useState(null);
   const [studentAdmnNo, SetStudentAdmNo] = useState("");
+
   //const [feesData, SetFeesData] = useState(null);
 
   const classes = useStyles();
 
   //  console.log(user.email);
-  const handleSFees = (student_id) => {
+  const handleSFees = (student_id, name) => {
     //  e.preventDefault();
     if (student_id) {
-      console.log("Student Admission No:", studentAdmnNo);
-      getFeesInformation(student_id);
+      //    console.log("Student Admission No:", studentAdmnNo);
+      getFeesInformation(student_id, name);
     }
     // console.log(user);
   };
@@ -54,7 +55,7 @@ const FirebaseCRUD = () => {
   const handleSResults = (student_id) => {
     //  e.preventDefault();
     if (student_id) {
-      console.log("Student Admission No IN HANDLE RESULTS:", studentAdmnNo);
+      //   console.log("Student Admission No IN HANDLE RESULTS:", studentAdmnNo);
       getResultsInformation(student_id);
     }
     // console.log(user);
@@ -68,7 +69,7 @@ const FirebaseCRUD = () => {
         .orderByChild("father_email")
         .equalTo(user.email)
         .on("value", (snapshot) => {
-          console.log("Student Data From Firebase", snapshot.val());
+          //   console.log("Student Data From Firebase", snapshot.val());
           SetStudents(snapshot.val());
         });
     };
@@ -77,7 +78,7 @@ const FirebaseCRUD = () => {
 
   if (!students) return <div>Students Data is Loading......</div>;
   if (students) {
-    console.log(students);
+    //   console.log(students);
     return (
       <>
         <Grid
@@ -87,13 +88,8 @@ const FirebaseCRUD = () => {
           justify="center"
         >
           {students.map((student, index) => {
-            const {
-              class_name,
-              father_contact,
-              father_name,
-              name,
-              student_id,
-            } = student;
+            const { class_name, section, father_contact, name, student_id } =
+              student;
             return (
               <Grid item xs={12} sm={6} md={4}>
                 <Card className={classes.root}>
@@ -105,41 +101,30 @@ const FirebaseCRUD = () => {
                     >
                       Student Name: {name}
                     </Typography>
-                    <Typography>Class Name: {class_name}</Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                      Father Contact No: {father_contact}
+                    <Typography
+                      className={classes.title}
+                      color="textSecondary"
+                      gutterBottom
+                    >
+                      Admissio No: {student_id}
+                    </Typography>
+                    <Typography>
+                      Class Name: {class_name} {section}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button
-                      variant="contained"
+                      align="center"
                       color="primary"
                       size="small"
                       onClick={(e) => {
                         SetStudentAdmNo(student_id);
-                        handleSFees(student_id);
+                        handleSFees(student_id, name);
                         handleSResults(student_id);
-                        console.log(student_id);
+                        // console.log(student_id);
                       }}
                     >
                       View Detail Information
-                    </Button>
-
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      size="small"
-                      onClick={(e) => {
-                        SetStudentAdmNo(student_id);
-                        handleSResults(student_id);
-                        console.log(student_id);
-                      }}
-                    >
-                      RESULTS
-                    </Button>
-
-                    <Button variant="contained" size="small">
-                      HOME WORK
                     </Button>
                   </CardActions>
                 </Card>
@@ -149,12 +134,6 @@ const FirebaseCRUD = () => {
         </Grid>
       </>
     );
-  }
-
-  if (!feesData) return <div>Fees Data is Loading......</div>;
-  if (feesData) {
-    console.log("ADMISSION NO: ", studentAdmnNo);
-    return <div>Fees Data Loaded......</div>;
   }
 };
 
