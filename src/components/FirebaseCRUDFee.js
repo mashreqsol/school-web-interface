@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import firebase from "./firebase";
+
 import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+
 import Chart from "react-apexcharts";
 import { GithubContext } from "../context/context";
 
@@ -33,9 +29,9 @@ const useStyles = makeStyles({
 
 const FirebaseCRUDFee = () => {
   const { fees } = React.useContext(GithubContext);
-  const { user } = useAuth0();
-  const [students, SetStudents] = useState(null);
-  const [studentAdmnNo, SetStudentAdmNo] = useState("");
+  // const { user } = useAuth0();
+  // const [students, SetStudents] = useState(null);
+  // const [studentAdmnNo, SetStudentAdmNo] = useState("");
   //const [feesData, SetFeesData] = useState(null);
 
   const classes = useStyles();
