@@ -2,18 +2,25 @@ import React, { useEffect, useState } from "react";
 import firebase from "./firebase";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import { GithubContext } from "../context/context";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 200,
+    minWidth: 300,
   },
   bullet: {
     display: "inline-block",
@@ -30,7 +37,28 @@ const useStyles = makeStyles({
     paddingLeft: "20px",
     paddingRight: "20px",
   },
+  table: {
+    minWidth: 200,
+  },
 });
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.success.light,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
 
 const FirebaseCRUD = () => {
   const { getFeesInformation, feesData, getResultsInformation } =
@@ -86,53 +114,84 @@ const FirebaseCRUD = () => {
           container
           spacing={4}
           className={classes.gridContainer}
-          justify="left"
+          justify="center"
         >
-          {students.map((student, index) => {
-            const { class_name, section, father_contact, name, student_id } =
-              student;
-            return (
-              <Grid item xs={12} sm={6} md={4}>
-                <Card className={classes.root}>
-                  <CardContent>
-                    <Typography
-                      className={classes.title}
-                      color="textSecondary"
-                      gutterBottom
-                    >
-                      Student Name: {name}
-                    </Typography>
-                    <Typography
-                      className={classes.title}
-                      color="textSecondary"
-                      gutterBottom
-                    >
-                      Admissio No: {student_id}
-                    </Typography>
-                    <Typography>
-                      Class Name: {class_name} {section}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button
-                      align="center"
-                      color="primary"
-                      size="small"
-                      onClick={(e) => {
-                        SetStudentAdmNo(student_id);
-                        handleSFees(student_id, name);
-                        handleSResults(student_id);
-                        // console.log(student_id);
-                      }}
-                    >
-                      View Detail Information
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            );
-          })}
+          <Grid item xs={12} sm={4} md={6}>
+            <Card className={classes.root}>
+              <CardContent>
+                <Typography
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  List of Students Registered Under "{user.email}"
+                </Typography>
+                <TableContainer component={Paper}>
+                  <Table
+                    className={classes.table}
+                    size="small"
+                    aria-label="customized table"
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell>Student Name</StyledTableCell>
+                        <StyledTableCell align="left">
+                          Admission No
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                          Class - Section
+                        </StyledTableCell>
+                        <StyledTableCell align="left">Action</StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {students.map((student, index) => {
+                        const {
+                          class_name,
+                          section,
+                          father_contact,
+                          name,
+                          student_id,
+                        } = student;
+                        return (
+                          <StyledTableRow key={name}>
+                            <StyledTableCell component="th" scope="row">
+                              {name}
+                            </StyledTableCell>
+                            <StyledTableCell align="left">
+                              {student_id}
+                            </StyledTableCell>
+                            <StyledTableCell align="left">
+                              {class_name} - {section}
+                            </StyledTableCell>
+
+                            <StyledTableCell align="left">
+                              <Button
+                                variant="contained"
+                                color="secondary"
+                                size="small"
+                                onClick={(e) => {
+                                  SetStudentAdmNo(student_id);
+                                  handleSFees(student_id, name);
+                                  handleSResults(student_id);
+                                  // console.log(student_id);
+                                }}
+                              >
+                                Details
+                              </Button>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
+        <br />
+        <br />
       </>
     );
   }
