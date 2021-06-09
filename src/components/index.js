@@ -6,7 +6,7 @@ import FirebaseCRUD from "./FirebaseCRUD";
 import FirebaseCRUDFee from "./FirebaseCRUDFee";
 import FirebaseCRUDResult from "./FirebaseCRUDResult";
 import DailyHomework from "./DailyHomework";
-
+import Whatsapp from "./Whatsapp";
 export {
   Info,
   User,
@@ -16,4 +16,5 @@ export {
   FirebaseCRUDFee,
   FirebaseCRUDResult,
   DailyHomework,
+  Whatsapp,
 };

@@ -18,6 +18,7 @@ import {
   FirebaseCRUDFee,
   FirebaseCRUDResult,
   DailyHomework,
+  Whatsapp,
 } from "../components";
 
 const Dashboard = () => {
@@ -42,7 +43,7 @@ const Dashboard = () => {
       <Info />
       <User /> */}
       <FirebaseCRUD />
-
+      <Whatsapp />
       <Grid
         container
         spacing={4}
