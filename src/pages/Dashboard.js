@@ -43,7 +43,7 @@ const Dashboard = () => {
       <Info />
       <User /> */}
       <FirebaseCRUD />
-      <Whatsapp />
+
       <Grid
         container
         spacing={4}
@@ -80,6 +80,9 @@ const Dashboard = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <DailyHomework />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Whatsapp />
         </Grid>
       </Grid>
     </main>
