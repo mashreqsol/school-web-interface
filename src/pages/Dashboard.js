@@ -19,11 +19,13 @@ import {
   FirebaseCRUDResult,
   DailyHomework,
   Whatsapp,
+  ImportantNote,
 } from "../components";
 
 const Dashboard = () => {
   const classes = useStyles();
-  const { isloading, studentName } = React.useContext(GithubContext);
+  const { isloading, studentName, studentNotice } =
+    React.useContext(GithubContext);
 
   if (isloading) {
     return (
@@ -42,8 +44,9 @@ const Dashboard = () => {
       {/*  <Search />
       <Info />
       <User /> */}
-      <FirebaseCRUD />
 
+      <FirebaseCRUD />
+      <ImportantNote />
       <Grid
         container
         spacing={4}

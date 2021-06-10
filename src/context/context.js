@@ -21,6 +21,7 @@ const GithubProvider = ({ children }) => {
   const [fees, SetFees] = useState(null);
   const [results, SetResults] = useState(null);
   const [studentName, SetStudentName] = useState("");
+  const [studentNotice, SetStudentnotice] = useState("");
   const getResultsInformation = async (studentAdmnNo) => {
     /*   console.log(
       "Student Admission No Inside context: RESULT FUNCTION",
@@ -42,12 +43,13 @@ const GithubProvider = ({ children }) => {
       });
   };
 
-  const getFeesInformation = (studentAdmnNo, stdname) => {
+  const getFeesInformation = (studentAdmnNo, stdname, stdnotice) => {
     // console.log("Student Name", stdname);
     //   toggleError();
     //  setIsloading(true);
     //  console.log("Student Admission No Inside context:", studentAdmnNo);
     SetStudentName(stdname);
+    SetStudentnotice(stdnotice);
     const studentsFees = firebase.database().ref("fees");
     SetFees(null);
 
@@ -136,6 +138,7 @@ const GithubProvider = ({ children }) => {
         getResultsInformation,
         results,
         studentName,
+        studentNotice,
       }}
     >
       {children}

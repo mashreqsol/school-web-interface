@@ -72,11 +72,11 @@ const FirebaseCRUD = () => {
   const classes = useStyles();
 
   //  console.log(user.email);
-  const handleSFees = (student_id, name) => {
+  const handleSFees = (student_id, name, important_note) => {
     //  e.preventDefault();
     if (student_id) {
       //    console.log("Student Admission No:", studentAdmnNo);
-      getFeesInformation(student_id, name);
+      getFeesInformation(student_id, name, important_note);
     }
     // console.log(user);
   };
@@ -105,7 +105,7 @@ const FirebaseCRUD = () => {
     getStudents();
   }, []);
 
-  if (!students) return <></>;
+  if (!students) return <>No Student Found Under Your Login</>;
   if (students) {
     //   console.log(students);
     return (
@@ -124,8 +124,15 @@ const FirebaseCRUD = () => {
                   color="textSecondary"
                   gutterBottom
                 >
-                  List of Students Registered Under "{user.email}"
+                  Outstanding Amount PKR = 12,000
                 </Typography>
+                {/*  <Typography
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  List of Students Registered Under "{user.email}"
+                </Typography> */}
                 <TableContainer component={Paper}>
                   <Table
                     className={classes.table}
@@ -150,9 +157,11 @@ const FirebaseCRUD = () => {
                           class_name,
                           section,
                           father_contact,
+                          important_note,
                           name,
                           student_id,
                         } = student;
+                        console.log(student_id, important_note);
                         return (
                           <StyledTableRow key={name}>
                             <StyledTableCell component="th" scope="row">
@@ -172,7 +181,7 @@ const FirebaseCRUD = () => {
                                 size="small"
                                 onClick={(e) => {
                                   SetStudentAdmNo(student_id);
-                                  handleSFees(student_id, name);
+                                  handleSFees(student_id, name, important_note);
                                   handleSResults(student_id);
                                   // console.log(student_id);
                                 }}
