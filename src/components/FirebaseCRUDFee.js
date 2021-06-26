@@ -12,26 +12,27 @@ const FirebaseCRUDFee = () => {
         <CircularIndeterminate />
       </div>
     );
-  if (fees)
-    return (
-      <>
-        {fees.map((studentfee, index) => {
-          const { options, sheets } = studentfee;
+  if (fees) console.log(fees);
+  const { options, sheets, due_amount } = fees;
+  return (
+    <>
+      {/* {fees.map((studentfee, index) => { */}
+      {/* const { options, sheets } = studentfee; */}
 
-          return (
-            <div style={{ backgroundColor: "white", textAlign: "center" }}>
-              <div className="app">
-                <div className="row">
-                  <div className="mixed-chart">
-                    <Chart options={options} series={sheets} type="bar" />
-                  </div>
-                </div>
-              </div>
+      {/* return ( */}
+      <div style={{ backgroundColor: "white", textAlign: "center" }}>
+        <div className="app">
+          <div className="row">
+            <div className="mixed-chart">
+              <Chart options={options} series={sheets} type="bar" />
             </div>
-          );
-        })}
-      </>
-    );
+          </div>
+        </div>
+      </div>
+      {/* ); */}
+      {/* })} */}
+    </>
+  );
 };
 
 export default FirebaseCRUDFee;

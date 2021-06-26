@@ -12,23 +12,23 @@ const FirebaseCRUDResult = () => {
       </div>
     );
   if (results) {
+    const { options, sheets } = results;
     return (
       <>
-        {results.map((result, index) => {
-          const { options, sheets } = result;
+        {/* {results.map((result, index) => {
+          const { options, sheets } = result; */}
 
-          return (
-            <div style={{ backgroundColor: "white", textAlign: "center" }}>
-              <div className="app">
-                <div className="row">
-                  <div className="mixed-chart">
-                    <Chart options={options} series={sheets} type="bar" />
-                  </div>
-                </div>
+        <div style={{ backgroundColor: "white", textAlign: "center" }}>
+          <div className="app">
+            <div className="row">
+              <div className="mixed-chart">
+                <Chart options={options} series={sheets} type="bar" />
               </div>
             </div>
-          );
-        })}
+          </div>
+        </div>
+
+        {/* })} */}
       </>
     );
   }

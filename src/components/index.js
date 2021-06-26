@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import FirebaseCRUD from "./FirebaseCRUD";
 import FirebaseCRUDFee from "./FirebaseCRUDFee";
 import FirebaseCRUDResult from "./FirebaseCRUDResult";
+import FirebaseCRUDTask from "./FirebaseCRUDTask";
 import DailyHomework from "./DailyHomework";
 import Whatsapp from "./Whatsapp";
 import ImportantNote from "./ImportantNote";
@@ -19,4 +20,5 @@ export {
   DailyHomework,
   Whatsapp,
   ImportantNote,
+  FirebaseCRUDTask,
 };

@@ -61,8 +61,12 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 const FirebaseCRUD = () => {
-  const { getFeesInformation, feesData, getResultsInformation } =
-    React.useContext(GithubContext);
+  const {
+    getFeesInformation,
+    feesData,
+    getResultsInformation,
+    getTasksInformation,
+  } = React.useContext(GithubContext);
   const { user } = useAuth0();
   const [students, SetStudents] = useState(null);
   const [studentAdmnNo, SetStudentAdmNo] = useState("");
@@ -90,15 +94,25 @@ const FirebaseCRUD = () => {
     // console.log(user);
   };
 
+  const handleTasks = (class_info) => {
+    if (class_info) {
+      getTasksInformation(class_info);
+    }
+  };
+
   useEffect(() => {
+    //  console.log(user.email);
+    const loginid = user.email.split("@");
+    //  console.log(loginid[0]);
     const getStudents = () => {
-      const studentsList = firebase.database().ref("students");
+      const studentsList = firebase.database().ref("parents/" + loginid[0]);
       SetStudents(null);
       studentsList
-        .orderByChild("father_email")
-        .equalTo(user.email)
+        //    .orderByChild("father_email")
+        //   .equalTo(user.email)
         .on("value", (snapshot) => {
-          //   console.log("Student Data From Firebase", snapshot.val());
+          //    console.log("Student Data From Firebase", snapshot.val());
+
           SetStudents(snapshot.val());
         });
     };
@@ -107,7 +121,7 @@ const FirebaseCRUD = () => {
 
   if (!students) return <>No Student Found Under Your Login</>;
   if (students) {
-    //   console.log(students);
+    //  console.log(students);
     return (
       <>
         <Grid
@@ -124,7 +138,7 @@ const FirebaseCRUD = () => {
                   color="textSecondary"
                   gutterBottom
                 >
-                  Outstanding Amount PKR = 12,000
+                  Outstanding Amount PKR = 12,000 {students.parent_message}
                 </Typography>
                 {/*  <Typography
                   className={classes.title}
@@ -152,26 +166,26 @@ const FirebaseCRUD = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {students.map((student, index) => {
+                      {students.Students.map((student, index) => {
                         const {
-                          class_name,
-                          section,
-                          father_contact,
-                          important_note,
-                          name,
                           student_id,
+                          student_name,
+                          class_name,
+                          section_name,
+                          important_note,
                         } = student;
-                        console.log(student_id, important_note);
+                        //            console.log(student_id, important_note);
+                        const class_info = class_name + "-" + section_name;
                         return (
-                          <StyledTableRow key={name}>
+                          <StyledTableRow key={student_id}>
                             <StyledTableCell component="th" scope="row">
-                              {name}
+                              {student_name}
                             </StyledTableCell>
                             <StyledTableCell align="left">
                               {student_id}
                             </StyledTableCell>
                             <StyledTableCell align="left">
-                              {class_name} - {section}
+                              {class_info}
                             </StyledTableCell>
 
                             <StyledTableCell align="left">
@@ -181,8 +195,13 @@ const FirebaseCRUD = () => {
                                 size="small"
                                 onClick={(e) => {
                                   SetStudentAdmNo(student_id);
-                                  handleSFees(student_id, name, important_note);
+                                  handleSFees(
+                                    student_id,
+                                    student_name,
+                                    important_note
+                                  );
                                   handleSResults(student_id);
+                                  handleTasks(class_info);
                                   // console.log(student_id);
                                 }}
                               >

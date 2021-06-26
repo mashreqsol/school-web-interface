@@ -20,24 +20,49 @@ const GithubProvider = ({ children }) => {
   const [error, setError] = useState({ show: false, msg: `` });
   const [fees, SetFees] = useState(null);
   const [results, SetResults] = useState(null);
+  const [tasks, SetTasks] = useState(null);
   const [studentName, SetStudentName] = useState("");
   const [studentNotice, SetStudentnotice] = useState("");
+
   const getResultsInformation = async (studentAdmnNo) => {
     /*   console.log(
       "Student Admission No Inside context: RESULT FUNCTION",
       studentAdmnNo  );*/
 
-    const studentsResults = await firebase.database().ref("results");
+    const studentsResults = await firebase
+      .database()
+      .ref("results/" + studentAdmnNo);
     SetResults(null);
 
     studentsResults
-      .orderByChild("student_id")
-      .equalTo(studentAdmnNo)
+      //  .orderByChild("student_id")
+      //   .equalTo(studentAdmnNo)
       .on("value", (snapshot) => {
         const resultresponse = snapshot.val();
         //   console.log("results dataaaaaa  ", resultresponse);
         if (resultresponse) {
           SetResults(resultresponse);
+          //     console.log("Results", results);
+        }
+      });
+  };
+
+  const getTasksInformation = async (class_info) => {
+    /*   console.log(
+      "Student Admission No Inside context: RESULT FUNCTION",
+      studentAdmnNo  );*/
+
+    const studentTasks = await firebase.database().ref("tasks/" + class_info);
+    SetTasks(null);
+
+    studentTasks
+      //  .orderByChild("student_id")
+      //   .equalTo(studentAdmnNo)
+      .on("value", (snapshot) => {
+        const taskresponse = snapshot.val();
+        //   console.log("results dataaaaaa  ", resultresponse);
+        if (taskresponse) {
+          SetTasks(taskresponse);
           //     console.log("Results", results);
         }
       });
@@ -50,15 +75,16 @@ const GithubProvider = ({ children }) => {
     //  console.log("Student Admission No Inside context:", studentAdmnNo);
     SetStudentName(stdname);
     SetStudentnotice(stdnotice);
-    const studentsFees = firebase.database().ref("fees");
+    //  const studentsFees = firebase.database().ref("fees");
+    const studentsFees = firebase.database().ref("fees/" + studentAdmnNo);
     SetFees(null);
 
     studentsFees
-      .orderByChild("student_id")
-      .equalTo(studentAdmnNo)
+      //   .orderByChild("student_id")
+      //   .equalTo(studentAdmnNo)
       .on("value", (snapshot) => {
         const feeresponse = snapshot.val();
-        //    console.log("fees dataaaaaa  ", feeresponse);
+        console.log("fees dataaaaaa  ", feeresponse);
         if (feeresponse) {
           SetFees(feeresponse);
           //    console.log("Fee", fees);
@@ -139,6 +165,8 @@ const GithubProvider = ({ children }) => {
         results,
         studentName,
         studentNotice,
+        getTasksInformation,
+        tasks,
       }}
     >
       {children}

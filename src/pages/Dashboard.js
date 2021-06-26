@@ -20,6 +20,7 @@ import {
   DailyHomework,
   Whatsapp,
   ImportantNote,
+  FirebaseCRUDTask,
 } from "../components";
 
 const Dashboard = () => {
@@ -82,7 +83,7 @@ const Dashboard = () => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <DailyHomework />
+          <FirebaseCRUDTask />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Whatsapp />
