@@ -9,7 +9,7 @@ const Login = () => {
     <Wrapper>
       <div className="container">
         <img src={loginIMG} alt="login image" />
-        <h2>Tahir Model High School</h2>
+        <h1>Mashreq School</h1>
         <button className="btn" onClick={loginWithRedirect}>
           Parents Login / Sign Up
         </button>
